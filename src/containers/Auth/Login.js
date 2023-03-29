@@ -55,9 +55,9 @@ const Login = (props) => {
         window.localStorage.setItem("AdminAccessToken", accessToken);
         // 로그인이 성공한 경우 메인 페이지로 이동합니다.
         if (userId === "admin") {
-          window.location.href = "/admin";
+          window.location.href = "https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/admin";
         } else {
-          window.location.href = "/Menu";
+          window.location.href = "https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/Menu";
         }
       })
       .catch((ex) => {
