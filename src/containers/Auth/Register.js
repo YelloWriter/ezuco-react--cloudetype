@@ -68,7 +68,7 @@ const Register = () => {
                 UserId, UserPw, tableNum, userNick
             })
             .then(()=>{
-                window.location.href = 'http://localhost:3000/auth/login';})
+                window.location.href = '/auth/login';})
             .catch(error=>{
                 console.log(error.response.data); 
             })
