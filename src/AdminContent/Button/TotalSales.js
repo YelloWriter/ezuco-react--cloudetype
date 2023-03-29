@@ -31,9 +31,7 @@ const TotalSales = ({}) => {
         let result = 0;
         responseData.map((m) => (result = result + m.totalPrice)).toString();
         setTotalResult(result);
-      }).catch(error=>{
-        window.location.href="/jwtexpired"
-    });
+      });
   };
 
   //총계 받아오는 곳

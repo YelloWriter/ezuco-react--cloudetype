@@ -20,21 +20,15 @@ const Menu = ({ setContent }) => {
     setContent(number);
   };
   //카카오 해보자
-  const [, , removeCookie] = useCookies("nickName");
-  const KAKAO_LOGOUT_URL = "http://localhost:3000";
 
   //카카오 로그인
-  function deleteCookie() {
-    removeCookie("nickName");
-    axios.get("/deleteCookie");
-  }
 
   //자체서버 로그아웃
   const LogOut = () => {
     // Access Token을 로컬 스토리지에서 제거.
-    window.localStorage.removeItem("accessToken");
+    window.localStorage.removeItem("adminAccessToken");
     // 로그인 페이지로 이동.
-    window.location.href = "http://localhost:3000/";
+    window.location.href = "/";
   };
 
   return (
@@ -50,10 +44,8 @@ const Menu = ({ setContent }) => {
             <a className="Logout-A">
               <button
                 className="LogoutButton"
-                href={KAKAO_LOGOUT_URL}
                 id="logout"
                 onClick={(e) => {
-                  deleteCookie();
                   LogOut();
                 }}
               >

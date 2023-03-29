@@ -69,9 +69,7 @@ const OrderTest = () => {
             else if (tableNum == "4") setContent_t4(content);
           }
         })
-        .catch((error) => {
-            window.location.href="/jwtexpired"
-        });
+        .catch((error) => {});
       if (pathVal === 4) {
         setPathVal(1);
       } else {
@@ -104,9 +102,7 @@ const OrderTest = () => {
             }
           })
         );
-      }).catch(error=>{
-      window.location.href="/jwtexpired"
-    })
+      });
   };
 
   return (

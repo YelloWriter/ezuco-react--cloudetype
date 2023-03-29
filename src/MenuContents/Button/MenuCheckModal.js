@@ -128,12 +128,12 @@ const MenuCheckModal = ({
   // }, [receiptContents])
 
   const sendMenu = () => {
-    const token = window.localStorage.getItem("userAccessToken");
+    const token = window.localStorage.getItem("accessToken");
     // 내가 content, totalPrice
     axios
       .post(
         "http://localhost:8080/order",
-        { 'content': menuText, "totalPrice": totalPrice },
+        { menuText: menuText, totalPrice: totalPrice },
         {
           headers: {
             "Content-Type": "application/json",
@@ -146,9 +146,25 @@ const MenuCheckModal = ({
       })
       .catch((error) => {
         console.log("실패", error);
-        window.location.href="/jwtexpired"
       });
 
+    axios
+      .post(
+        "http://localhost:3000/admin",
+        { bill: bill, volume: volume },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+      )
+      .then((res) => {
+        console.log("성공했습니다.");
+      })
+      .catch((error) => {
+        console.log("실패", error);
+      });
   };
 
   return (

@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be443dcc-8dfe-4031-8f04-1ec360264d8a" name="변경" comment="change js">
+      <change beforePath="$PROJECT_DIR$/.idea/ezuco-react--cloudetype.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminContent/Button/OrderTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminContent/Button/OrderTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminContent/Button/TotalSales.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminContent/Button/TotalSales.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminContent/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminContent/Menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MenuContents/Button/MenuCheckModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuContents/Button/MenuCheckModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MenuContents/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuContents/Menu.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Auth/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Auth/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
@@ -75,7 +80,7 @@
       <workItem from="1680050061182" duration="122000" />
       <workItem from="1680050288658" duration="320000" />
       <workItem from="1680058200555" duration="1835000" />
-      <workItem from="1680060944688" duration="6464000" />
+      <workItem from="1680071224331" duration="280000" />
     </task>
     <task id="LOCAL-00001" summary="change js">
       <created>1679475117291</created>
@@ -84,35 +89,7 @@
       <option name="project" value="LOCAL" />
       <updated>1679475117291</updated>
     </task>
-    <task id="LOCAL-00002" summary="change js">
-      <created>1680060965535</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1680060965536</updated>
-    </task>
-    <task id="LOCAL-00003" summary="change js">
-      <created>1680062328388</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1680062328388</updated>
-    </task>
-    <task id="LOCAL-00004" summary="change js">
-      <created>1680062462975</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1680062462975</updated>
-    </task>
-    <task id="LOCAL-00005" summary="change js">
-      <created>1680062620971</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1680062620971</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

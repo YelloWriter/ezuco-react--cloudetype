@@ -1,10 +1,10 @@
-import { Component, useEffect, useState} from "react";
+import { Component, useEffect, useState, useRef } from "react";
 import userData from "../../local-json/users.json";
 import { InputWithLabel, RegisterLink } from "../../components/";
 import styled from "styled-components";
 import oc from "open-color";
 import { shadow } from "../../lib/styleUtil";
-import { BrowserRouter as Router, Route, Switch,Redirect} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 const LoginBtn = styled.button`
@@ -55,8 +55,11 @@ const Login = (props) => {
         window.localStorage.setItem("AdminAccessToken", accessToken);
         // 로그인이 성공한 경우 메인 페이지로 이동합니다.
         if (userId === "admin") {
-          window.location.href = "/Admin";
+          window.localStorage.setItem("adminAccessToken", accessToken);
+          window.location.href = "/admin";
+          
         } else {
+          window.localStorage.setItem("userAccessToken", accessToken);
           window.location.href = "/Menu";
         }
       })
@@ -91,6 +94,7 @@ const Login = (props) => {
         />
         <LoginBtn type="submit">로그인</LoginBtn>
       </form>
+
 
       <RegisterLink to="/auth/register">회원가입</RegisterLink>
     </>
