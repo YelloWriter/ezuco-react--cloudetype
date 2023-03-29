@@ -94,9 +94,9 @@ const Menu = ({
   //자체서버 로그아웃
   const LogOut = () => {
     // Access Token을 로컬 스토리지에서 제거.
-    window.localStorage.removeItem("accessToken");
+    window.localStorage.removeItem("userAccessToken");
     // 로그인 페이지로 이동.
-    window.location.href = "http://localhost:3000/";
+    window.location.href = "/";
   };
 
   //버튼 보내는거

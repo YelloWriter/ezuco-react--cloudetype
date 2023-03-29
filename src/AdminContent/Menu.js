@@ -28,7 +28,7 @@ const Menu = ({ setContent }) => {
     // Access Token을 로컬 스토리지에서 제거.
     window.localStorage.removeItem("adminAccessToken");
     // 로그인 페이지로 이동.
-    window.location.href = "/";
+    window.location.href ="/";
   };
 
   return (
