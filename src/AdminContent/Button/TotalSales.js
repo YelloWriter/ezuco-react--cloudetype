@@ -18,7 +18,7 @@ const TotalSales = ({}) => {
     setShow(true);
     const accessToken = window.localStorage.getItem("adminAccessToken");
     axios
-      .get("http://localhost:8080/total", {
+      .get("https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/total", {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + accessToken,
@@ -31,7 +31,9 @@ const TotalSales = ({}) => {
         let result = 0;
         responseData.map((m) => (result = result + m.totalPrice)).toString();
         setTotalResult(result);
-      });
+      }).catch(error=>{
+        window.location.href="/jwtexpired"
+    });
   };
 
   //총계 받아오는 곳

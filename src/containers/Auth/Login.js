@@ -36,7 +36,6 @@ const Title = styled.div`
   margin-bottom: 1rem;
 `;
 const Login = (props) => {
-  const KAKAO_AUTH_URL = "http://localhost:8080/oauth2/authorization/kakao";
   //자체서버 로그인 토큰 저장
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
@@ -56,9 +55,9 @@ const Login = (props) => {
         window.localStorage.setItem("AdminAccessToken", accessToken);
         // 로그인이 성공한 경우 메인 페이지로 이동합니다.
         if (userId === "admin") {
-          window.location.href = "http://localhost:3000/admin";
+          window.location.href = "/admin";
         } else {
-          window.location.href = "http://localhost:3000/Menu";
+          window.location.href = "/Menu";
         }
       })
       .catch((ex) => {

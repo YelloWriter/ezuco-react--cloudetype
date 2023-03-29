@@ -42,7 +42,7 @@ const OrderTest = () => {
   useEffect(() => {
     setTimeout(() => {
       axios
-        .get(`http://localhost:8080/order/list`, {
+        .get(`https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/order/list`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + accessToken,
@@ -69,7 +69,9 @@ const OrderTest = () => {
             else if (tableNum == "4") setContent_t4(content);
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+            window.location.href="/jwtexpired"
+        });
       if (pathVal === 4) {
         setPathVal(1);
       } else {
@@ -82,7 +84,7 @@ const OrderTest = () => {
   // 삭제 기능
   const handleDelete = (delIdx) => {
     axios
-      .delete(`http://localhost:8080/order/${delIdx + 1}`, {
+      .delete(`https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/order/${delIdx + 1}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + accessToken,
@@ -102,7 +104,9 @@ const OrderTest = () => {
             }
           })
         );
-      });
+      }).catch(error=>{
+      window.location.href="/jwtexpired"
+    })
   };
 
   return (

@@ -41,62 +41,20 @@ const Menu = ({
   const [profile, setProfile] = useState("");
   const [receiptContents, setReceiptContents] = useState("");
 
-  const KAKAO_LOGOUT_URL = "http://localhost:3000";
+  const mainUrl = "/";
   const params = new URLSearchParams(window.location.search);
   const code = params.get("code");
 
   //주문하기 들어왔을때만 영수증에 들어가게 하기
   const [isOrderDone, setOrderDone] = useState(false);
 
-  //카카오 로그인
-  function deleteCookie() {
-    removeCookie("nickName");
-    axios.get("/deleteCookie");
-  }
-  useEffect(() => {
-    if (code !== null) {
-      axios
-        .get("/~~~", { params: { code: code } })
-        .then((response) => {
-          setKPerson(response.data);
-        })
-        .then(() => {
-          window.history.pushState(
-            kperson,
-            null,
-            "http://localhost:3000/Menu/Contents"
-          );
-        });
-    }
-
-    axios.get("/~~~~").then((response) => {
-      var arr = response.data.split(" ");
-      const nickName = arr[0];
-      const email = arr[1];
-      const profile = arr[2];
-
-      setNickName(nickName);
-      setEmail(email);
-      setProfile(profile);
-    });
-
-    if (nickName !== "") {
-      axios.get("/addkperson", null, {
-        params: {
-          nickname: nickName,
-          email: email,
-          profile: profile,
-        },
-      });
-    }
-  }, [code, email, kperson, nickName, profile]);
 
   //자체서버 로그아웃
   const LogOut = () => {
     // Access Token을 로컬 스토리지에서 제거.
-    window.localStorage.removeItem("accessToken");
+    window.localStorage.removeItem("userAccessToken");
     // 로그인 페이지로 이동.
-    window.location.href = "http://localhost:3000/";
+    window.location.href = "/";
   };
 
   //버튼 보내는거
@@ -163,7 +121,7 @@ const Menu = ({
               <a className="Logout-A">
                 <button
                   className="LogoutButton"
-                  href={KAKAO_LOGOUT_URL}
+                  href={mainUrl}
                   id="logout"
                   onClick={(e) => {
                     deleteCookie();
@@ -254,7 +212,7 @@ const Menu = ({
           <Col id="cam_2">
             <Col id="cam_monitor">
               <form
-                action="http://localhost:3000/admin"
+                action="/admin"
                 method="post"
                 id="formBox"
               >
