@@ -124,7 +124,6 @@ const Menu = ({
                   href={mainUrl}
                   id="logout"
                   onClick={(e) => {
-                    deleteCookie();
                     LogOut();
                   }}
                 >
