@@ -45,7 +45,12 @@ const Menu = ({
   const [isOrderDone, setOrderDone] = useState(false);
   const token =window.localStorage.getItem("userAccessToken")
   const [tableNum, setTableNum] =useState("");
-  axios.get("https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/userOne",{headers:{'Content-Type': 'application/json','Authorization':"Bearer "+token}
+  const YOUR_REST_API_KEY="1cfc5abbc1e0dd24af7409e5284da67a"
+  const YOUR_LOGOUT_REDIRECT_URI="http://localhost:3000/"
+  const KAKAO_LOGOUT=`https://kauth.kakao.com/oauth/logout?client_id=${YOUR_REST_API_KEY}&logout_redirect_uri=${YOUR_LOGOUT_REDIRECT_URI}`
+
+  axios.get("https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/userOne",
+      {headers:{'Content-Type': 'application/json','Authorization':"Bearer "+token}
   }).then(response=>{
     setTableNum(response.data['tableNum']);
   })
@@ -94,7 +99,7 @@ const Menu = ({
     // Access Token을 로컬 스토리지에서 제거.
     window.localStorage.removeItem("userAccessToken");
     // 로그인 페이지로 이동.
-    window.location.href = "/";
+    window.location.href = `${KAKAO_LOGOUT}`;
   };
 
   //버튼 보내는거

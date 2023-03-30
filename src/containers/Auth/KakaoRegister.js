@@ -77,18 +77,19 @@ const KakaoRegister = () => {
             setEmail(r.data["email"])
             setImage(r.data["imagePath"])
             setName(r.data["nickname"])
-
-            Swal.fire({
-                icon: "success",
-                title: "계정연동 마저하기!",
-                text: `${name}님`+"환영합니다!",
-                imageUrl:`${image}`,
-                confirmButtonText: "확인",
-            })
         }).catch(e=>{
             console.log(e)
         })
     }, [])
+    useEffect(()=>{
+        Swal.fire({
+            icon: "success",
+            title: `${name}님`+" 환영합니다!",
+            text: "계정 연동을 마저 진행해주세요.",
+            imageUrl:`${image}`,
+            confirmButtonText: "확인",
+        })
+    },[email,image,name])
     //카카오 로그인 유저 정보 받기
 
     //계정 연동 완료되면 지우기

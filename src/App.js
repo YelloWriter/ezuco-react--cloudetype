@@ -13,21 +13,21 @@ const App = () => {
 
 
     // menu에서 admin으로 바로 받기 (테이블번호 받기는 아직임)
-    useEffect(() => {
-        // console.log("혜인아 이거 받아!", forHyenoh);
-
-        const oldOne = JSON.parse(localStorage.getItem("forHyenoh"))
-
-
-        console.log("원래 로컬에 저장되어 있던 거 :",oldOne)
-        console.log("이제 거기에 더해야만 하는 거 :",forHyenoh)
-
-        console.log(oldOne.totalPrice + forHyenoh.totalPrice)
-
-        if (forHyenoh) {
-            window.localStorage.setItem("forHyenoh", JSON.stringify(forHyenoh));
-        }
-    }, [forHyenoh]);
+    // useEffect(() => {
+    //     // console.log("혜인아 이거 받아!", forHyenoh);
+    //
+    //     const oldOne = JSON.parse(localStorage.getItem("forHyenoh"))
+    //
+    //
+    //     console.log("원래 로컬에 저장되어 있던 거 :",oldOne)
+    //     console.log("이제 거기에 더해야만 하는 거 :",forHyenoh)
+    //
+    //     console.log(oldOne.totalPrice + forHyenoh.totalPrice)
+    //
+    //     if (forHyenoh) {
+    //         window.localStorage.setItem("forHyenoh", JSON.stringify(forHyenoh));
+    //     }
+    // }, [forHyenoh]);
 
     return (
         <Switch>

@@ -98,6 +98,7 @@ const Login = (props) => {
             src={process.env.PUBLIC_URL + "/kakao2.png"}
             alt="카카오 연동하기"
         />
+        <p>연동하러가기</p>
       </a>
 
 
