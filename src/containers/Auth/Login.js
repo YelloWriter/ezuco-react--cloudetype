@@ -36,6 +36,7 @@ const Title = styled.div`
   margin-bottom: 1rem;
 `;
 const Login = (props) => {
+  const KAKAO_AUTH_URL = "http://localhost:8080/oauth2/authorization/kakao";
   //자체서버 로그인 토큰 저장
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
@@ -52,12 +53,10 @@ const Login = (props) => {
         console.log("성공" + response.headers);
         // Access Token을 받아서 로컬 스토리지에 저장합니다.
         let accessToken = response.headers.get("Authorization").substring(7);
-        window.localStorage.setItem("AdminAccessToken", accessToken);
         // 로그인이 성공한 경우 메인 페이지로 이동합니다.
         if (userId === "admin") {
           window.localStorage.setItem("adminAccessToken", accessToken);
           window.location.href = "/admin";
-          
         } else {
           window.localStorage.setItem("userAccessToken", accessToken);
           window.location.href = "/Menu";
@@ -94,6 +93,12 @@ const Login = (props) => {
         />
         <LoginBtn type="submit">로그인</LoginBtn>
       </form>
+      <a type="submit" href={KAKAO_AUTH_URL}>
+        <img style={{width:"80px",height:"50px",marginTop:"10px"}}
+            src={process.env.PUBLIC_URL + "/kakao2.png"}
+            alt="카카오 연동하기"
+        />
+      </a>
 
 
       <RegisterLink to="/auth/register">회원가입</RegisterLink>

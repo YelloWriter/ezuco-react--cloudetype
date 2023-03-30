@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
+import Swal from 'sweetalert2'
 import "./Recipt.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -16,28 +17,31 @@ const temp = {
 
 //메뉴 받아오는 부분
 const MenuCheckModal = ({
-  setReceiptContents,
-  isOrderDone,
-  setOrderDone,
-  setBill,
-  setMenuText,
-  setVolume,
-  bill,
-  volume,
-  receiptContents,
-  content,
-  menuText,
-  setForHyenoh,
-}) => {
+                          isOrderDone,
+                          setOrderDone,
+                          setBill,
+                          setMenuText,
+                          setVolume,
+                          bill,
+                          volume,
+                          content,
+                          menuText,
+                          setForHyenoh,
+
+                        }) => {
   const [show, setShow] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+    //헤더 테이블
+  const [sentCnt, setSentCnt] = useState(0)
 
-  //헤더 테이블
+
+//헤더 테이블
   const headerMeta = ["상품", "수량", "가격"];
 
   //모달 관리
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
 
   // 값 키 벨류 받아오고 토탈값 구하기
   useEffect(() => {
@@ -107,155 +111,146 @@ const MenuCheckModal = ({
       tequilaSunrise: 0,
     });
   };
-  //관리자한테 메뉴들을 보내주는 부분
-  // useEffect(() => {
+    const token =window.localStorage.getItem("userAccessToken")
+  const [tableNum, setTableNum] =useState("");
+  axios.get("https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/userOne",{headers:{'Content-Type': 'application/json','Authorization':"Bearer "+token}
+    }).then(response=>{
+        setTableNum(response.data['tableNum']);
+    })
+    Swal.fire({
+        icon: "warning",
+        title: "주문 확인",
+        text: `${tableNum}번 테이블 주문 완료!`,
+        confirmButtonText: "확인",
+    })
+  const sendMenu =() => {
+    console.log(`이전까지 주문 횟수는 ${sentCnt}번입니다`);
 
-  //   axios.post('~~~~',{
-  //     'menuText':menuText,
-  //     // "bill":bill,
-  //     "totalPrice":totalPrice,
-  //     // "volume":volume,
-  //     // 'receiptContents' :receiptContents,
-
-  //   })
-  //   .then((res) => {
-  //     console.log("성공");
-  //   })
-  //   .catch((error) => {
-  //     console.log("실패");
-  //   })
-
-  // }, [receiptContents])
-
-  const sendMenu = () => {
-    const token = window.localStorage.getItem("accessToken");
     // 내가 content, totalPrice
-    axios
-      .post(
-        "http://localhost:8080/order",
-        { menuText: menuText, totalPrice: totalPrice },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-        }
-      )
-      .then((res) => {
-        console.log("성공했습니다.");
-      })
-      .catch((error) => {
-        console.log("실패", error);
-      });
+    if(sentCnt === 0){
+      axios.post('https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/create',
+          {'content':menuText,'totalPrice':totalPrice},
+          {headers:{'Content-Type': 'application/json','Authorization':"Bearer "+token}
+          })
+          .then((res) => {
+            console.log("성공했습니다.");
+              Swal.fire({
+                  icon: "success",
+                  title: "주문 확인",
+                  text: `${tableNum}번 테이블 주문 완료!`,
+                  confirmButtonText: "확인",
+              })
+              setSentCnt(sentCnt+1)
+          })
+          .catch((error) => {
+            console.log("실패",error);
+            window.location.href = '/jwtExpired'
+          })
 
-    axios
-      .post(
-        "http://localhost:3000/admin",
-        { bill: bill, volume: volume },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-        }
-      )
-      .then((res) => {
-        console.log("성공했습니다.");
-      })
-      .catch((error) => {
-        console.log("실패", error);
-      });
-  };
+    }else{
+      axios.put(`https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/update/${tableNum}`,
+          {'content':menuText,'totalPrice':totalPrice},
+          {headers:{'Content-Type': 'application/json','Authorization':"Bearer "+token}
+          })
+          .then((res) => {
+            console.log("성공했습니다.");
+              Swal.fire({
+                  icon: "success",
+                  title: "추가 주문 확인",
+                  text: `${tableNum}번 테이블 추가주문 완료!`,
+                  confirmButtonText: "확인",
+              })
+          })
+          .catch(()=>{
+              // window.location.href='/jwtexpired'
+          });
+    }
 
+  }
+    useEffect(() => {
+        console.log(`현재까지 주문 횟수는 ${sentCnt}번입니다`);
+    }, [sentCnt]);
   return (
-    <>
-      <Button
-        variant="light"
-        id="OrderCheck"
-        size="lg"
-        onClick={(e) => {
-          setOrderDone(!isOrderDone);
-          handleShow();
-        }}
-      >
-        주문 하기 !
-      </Button>
+      <>
+        <Button
+            id="OrderCheck"
+            size="lg"
+            style={{color:"white", backgroundColor:"rgb(38 155 185)",border:"none"}}
+            onClick={(e) => {
+              setOrderDone(!isOrderDone);
+              handleShow();
+            }}
+        >
+          주문 하기
+        </Button>
 
-      <Modal style={temp} show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title className="OrderList" style={{ textAlign: "center" }}>
-            주문확인
-          </Modal.Title>
-        </Modal.Header>
+        <Modal style={temp} show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title className="OrderList" style={{ textAlign: "center" }}>
+              주문확인
+            </Modal.Title>
+          </Modal.Header>
 
-        <Modal.Body className="OrderList">
-          <Table bordered variant="dark" className="center">
-            <thead>
+          <Modal.Body className="OrderList">
+            <Table bordered  className="center">
+              <thead>
               <tr>
                 {headerMeta.map((i) => (
-                  <th>{i}</th>
+                    <th>{i}</th>
                 ))}
               </tr>
-            </thead>
+              </thead>
 
-            <tbody className="ReciptBody">
+              <tbody className="ReciptBody">
               {Object.keys(bill).map((b) => {
                 return (
-                  <>
-                    <tr>
-                      <td>{b}</td>
-                      <td>{volume[b]}</td>
-                      <td> {bill[b]}</td>
-                    </tr>
-                  </>
+                    <>
+                      <tr>
+                        <td>{b}</td>
+                        <td>{volume[b]}</td>
+                        <td> {bill[b]}</td>
+                      </tr>
+                    </>
                 );
               })}
-            </tbody>
+              </tbody>
 
-            <tfoot className="ReciptFoot">
+              <tfoot className="ReciptFoot">
               <th></th>
               <th></th>
               total : {totalPrice} 원
-            </tfoot>
-          </Table>
-        </Modal.Body>
+              </tfoot>
+            </Table>
+          </Modal.Body>
 
-        <Modal.Footer>
-          <div style={{ color: "black" }}> 주문하시겠습니까??</div>
-          <Button
-            className="ModalSend"
-            variant="outline-info"
-            id="send"
-            onClick={(e) => {
-              console.log("나 클릭됐슈");
-              sendMenu();
-              setForHyenoh({
-                bill,
-                volume,
-                totalPrice,
-              });
-              // setReceiptContents({
-              //   // bill,
-              //   // volume,
-              //   totalPrice,
-              //   content
-              // //tableNum
+          <Modal.Footer>
+            <div style={{ color: "black" }}> 주문하시겠습니까?</div>
+            <Button
+                className="ModalSend"
+                variant="outline-info"
+                id="send"
+                onClick={(e) => {
 
-              // });
-              //클랙했을때 리셋
-              ClickReset();
+                  sendMenu();
+                  setForHyenoh({
+                    bill,
+                    volume,
+                    totalPrice,
+                  });
+                  //클랙했을때 리셋
+                  ClickReset();
 
-              //클릭했을때 영수증에 보내기
+                  //클릭했을때 영수증에 보내기
 
-              //닫기보턴
-              handleClose();
-            }}
-          >
-            확인
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
+                  //닫기보턴
+                  handleClose();
+                }}
+            >
+              확인
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
   );
 };
 

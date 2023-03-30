@@ -5,9 +5,10 @@ import {InputWithLabel, RegisterLink } from "../../components/";
 import styled from "styled-components";
 import { shadow } from "../../lib/styleUtil";
 import axios from "axios";
+import Swal from "sweetalert2";
 // import {color} from "three/examples/jsm/nodes/shadernode/ShaderNodeBaseElements";
 
-const Title = styled.div`
+const Title2 = styled.div`
   font-size: 1.5rem;
   font-weight: 500;
   color: gray;
@@ -24,7 +25,7 @@ const checkIdPw = {
     fontSize: "0.9rem"
 }
 
-const LoginBtn = styled.button`
+const LoginBtn2 = styled.button`
   margin-top: 1rem;
   padding-top: 0.6rem;
   padding-bottom: 0.5rem;
@@ -53,12 +54,10 @@ const LoginBtn = styled.button`
   }
 `;
 
-const registerFunc = async (value) => await axios.post('https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/join',
-    {"userId":value.UserId, "userPw":value.UserPw,"tableNum":value.tableNum});
-
-
-
-const Register = () => {
+const getData = async () => await axios.get('http://localhost:8080/snsuserInfo')
+const registerFunc = async (value) => await axios.post('http://localhost:8080/join',
+    {"userId":value.email, "userPw":value.UserPw,"tableNum":value.tableNum})
+const KakaoRegister = () => {
     const [UserId, setUserId] = useState("");
     const [UserPw,setUserPw] = useState("");
     const [tableNum,setTableNum]= useState(0);
@@ -67,10 +66,39 @@ const Register = () => {
     // 비번 일치 안되면 회원가입 안되도록 함
     const [match, setMatch] = useState(null);
     const [checkVal,setCheckVal] =useState(null);
+    const [email,setEmail] =useState("");
+    const [image,setImage] =useState("");
+    const [name,setName] =useState("");
 
+
+    useEffect(() => {
+        getData().then(r => {
+            console.log(r.data);
+            setEmail(r.data["email"])
+            setImage(r.data["imagePath"])
+            setName(r.data["nickname"])
+
+            Swal.fire({
+                icon: "success",
+                title: "계정연동 마저하기!",
+                text: `${name}님`+"환영합니다!",
+                imageUrl:`${image}`,
+                confirmButtonText: "확인",
+            })
+        }).catch(e=>{
+            console.log(e)
+        })
+    }, [])
+    //카카오 로그인 유저 정보 받기
+
+    //계정 연동 완료되면 지우기
+    const delfunc =()=>{axios.delete(`http://localhost:8080/snsdel/${email}`,).catch(e=>{
+        console.log(e)
+    })
+}
     //아이지 중복체크 true면 중복/ 중복 아니면 false
     const dupleId = (e)=>{e.preventDefault()
-        axios.post('https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/checkId',{"userId":UserId}).then(response=>{
+        axios.post('https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/checkId',{"userId":email}).then(response=>{
             console.log(response.data)
             if(response.data){
                 setCheckVal(true)
@@ -128,7 +156,7 @@ const Register = () => {
         }
 
         registerFunc({
-            UserId, UserPw, tableNum
+            email, UserPw, tableNum
         })
             .then(()=>{
                 window.location.href = '/auth/login';})
@@ -145,7 +173,7 @@ const Register = () => {
                     SignUp(e);
                 }}
             >
-                <Title>회원 가입</Title>
+                <Title2>회원 가입</Title2>
                 <h6 style={{ color: "black" }}>테이블 번호</h6>
                 <select
                     name="TableNumber"
@@ -170,6 +198,8 @@ const Register = () => {
                     label="아이디"
                     name="userId"
                     placeholder="아이디"
+                    value={email}
+                    readonly
                     onChange={(e) => setUserId(e.target.value)}
                 />
                 <div>
@@ -209,12 +239,11 @@ const Register = () => {
           )} */}
                 </div>
 
-                <LoginBtn type="submit" disabled={!match}>
+                <LoginBtn2 type="submit" disabled={!match} onclick={delfunc()}>
                     회원가입
                     {match === null ? <span></span> :
                         match ? <span></span> : <span >  불가</span>}
-
-                </LoginBtn>
+                </LoginBtn2>
 
                 <RegisterLink to="/auth/login">로그인</RegisterLink>
             </form>
@@ -222,4 +251,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default KakaoRegister;

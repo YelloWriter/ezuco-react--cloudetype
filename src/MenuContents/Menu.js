@@ -32,6 +32,7 @@ const Menu = ({
   setVolume,
   menuText,
   setForHyenoh,
+    forHyenoh
 }) => {
   //카카오 해보자
   const [, , removeCookie] = useCookies("nickName");
@@ -40,56 +41,53 @@ const Menu = ({
   const [email, setEmail] = useState("");
   const [profile, setProfile] = useState("");
   const [receiptContents, setReceiptContents] = useState("");
-
-  const KAKAO_LOGOUT_URL = "http://localhost:3000";
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get("code");
-
   //주문하기 들어왔을때만 영수증에 들어가게 하기
   const [isOrderDone, setOrderDone] = useState(false);
-
+  const token =window.localStorage.getItem("userAccessToken")
+  const [tableNum, setTableNum] =useState("");
+  axios.get("https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/userOne",{headers:{'Content-Type': 'application/json','Authorization':"Bearer "+token}
+  }).then(response=>{
+    setTableNum(response.data['tableNum']);
+  })
   //카카오 로그인
-  function deleteCookie() {
-    removeCookie("nickName");
-    axios.get("/deleteCookie");
-  }
-  useEffect(() => {
-    if (code !== null) {
-      axios
-        .get("/~~~", { params: { code: code } })
-        .then((response) => {
-          setKPerson(response.data);
-        })
-        .then(() => {
-          window.history.pushState(
-            kperson,
-            null,
-            "http://localhost:3000/Menu/Contents"
-          );
-        });
-    }
-
-    axios.get("/~~~~").then((response) => {
-      var arr = response.data.split(" ");
-      const nickName = arr[0];
-      const email = arr[1];
-      const profile = arr[2];
-
-      setNickName(nickName);
-      setEmail(email);
-      setProfile(profile);
-    });
-
-    if (nickName !== "") {
-      axios.get("/addkperson", null, {
-        params: {
-          nickname: nickName,
-          email: email,
-          profile: profile,
-        },
-      });
-    }
-  }, [code, email, kperson, nickName, profile]);
+  //
+  // useEffect(() => {
+  //   if (code !== null) {
+  //     axios
+  //       .get("/~~~", { params: { code: code } })
+  //       .then((response) => {
+  //         setKPerson(response.data);
+  //       })
+  //       .then(() => {
+  //         window.history.pushState(
+  //           kperson,
+  //           null,
+  //           "http://localhost:3000/Menu/Contents"
+  //         );
+  //       });
+  //   }
+  //
+  //   axios.get("/~~~~").then((response) => {
+  //     var arr = response.data.split(" ");
+  //     const nickName = arr[0];
+  //     const email = arr[1];
+  //     const profile = arr[2];
+  //
+  //     setNickName(nickName);
+  //     setEmail(email);
+  //     setProfile(profile);
+  //   });
+  //
+  //   if (nickName !== "") {
+  //     axios.get("/addkperson", null, {
+  //       params: {
+  //         nickname: nickName,
+  //         email: email,
+  //         profile: profile,
+  //       },
+  //     });
+  //   }
+  // }, [code, email, kperson, nickName, profile]);
 
   //자체서버 로그아웃
   const LogOut = () => {
@@ -153,7 +151,7 @@ const Menu = ({
                 style={{ fontSize: "20px", marginTop: "8px" }}
               >
                 {" "}
-                {/* tableNum */}번 테이블
+                { tableNum }번 테이블
               </p>
 
               {/* {userID ==="admin" && 
@@ -163,16 +161,15 @@ const Menu = ({
               <a className="Logout-A">
                 <button
                   className="LogoutButton"
-                  href={KAKAO_LOGOUT_URL}
                   id="logout"
                   onClick={(e) => {
-                    deleteCookie();
                     LogOut();
                   }}
                 >
                   <FontAwesomeIcon
-                    icon={faSignOut}
-                    className="fontawesonicon"
+                      icon={faSignOut}
+                      className="fontawesonicon"
+                      style={{color:"rgb(38 155 185)"}}
                   />
 
                   <h6 className="logoutText"> LOGOUT </h6>
@@ -180,11 +177,11 @@ const Menu = ({
               </a>
 
               <Receipt
-                className="receipt"
-                receiptContents={receiptContents}
-                volume={volume}
-                bill={bill}
-                setReceiptContents={setReceiptContents}
+                  className="receipt"
+                  receiptContents={receiptContents}
+                  volume={volume}
+                  bill={bill}
+                  forHyenoh={forHyenoh}
               />
             </>
           </Col>
