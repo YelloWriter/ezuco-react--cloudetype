@@ -6,8 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="be443dcc-8dfe-4031-8f04-1ec360264d8a" name="변경" comment="change js">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminContent/Button/OrderTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminContent/Button/OrderTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminContent/Button/TotalSales.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminContent/Button/TotalSales.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MenuContents/Button/MenuCheckModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuContents/Button/MenuCheckModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MenuContents/Button/Receipt.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuContents/Button/Receipt.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MenuContents/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuContents/Menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MenuContents/MenuShow.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuContents/MenuShow.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Auth/KakaoRegister.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Auth/KakaoRegister.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Auth/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Auth/Login.js" afterDir="false" />
     </list>
@@ -79,6 +84,7 @@
       <workItem from="1680071224331" duration="1827000" />
       <workItem from="1680146476385" duration="15733000" />
       <workItem from="1680177965586" duration="2641000" />
+      <workItem from="1680221010904" duration="11695000" />
     </task>
     <task id="LOCAL-00001" summary="change js">
       <created>1679475117291</created>
@@ -121,5 +127,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="change js" />
     <option name="LAST_COMMIT_MESSAGE" value="change js" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/MenuContents/Button/MenuCheckModal.js</url>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

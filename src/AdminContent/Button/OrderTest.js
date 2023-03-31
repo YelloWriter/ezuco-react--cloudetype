@@ -7,6 +7,7 @@ import { faXmark, faCheckToSlot } from "@fortawesome/free-solid-svg-icons";
 import { BsClipboardCheck } from "react-icons/bs";
 import CloseButton from "react-bootstrap/CloseButton";
 import axios from "axios";
+import Swal from "sweetalert2";
 // import Checkbox from "./Checkbox";
 
 // const OrderArray = OrderText.split(", ");
@@ -70,7 +71,7 @@ const OrderTest = () => {
           }
         })
         .catch((error) => {
-          window.location.href='/jwtexpired'
+          // window.location.href='/jwtexpired'
         });
       if (pathVal === 4) {
         setPathVal(1);
@@ -80,7 +81,14 @@ const OrderTest = () => {
     }, 25000);
     // return ()=>clearInterval(timer)
   }, [pathVal]);
-
+  Swal.fire({
+    icon: "success",
+    title: "로봇이 서빙을 완료했습니다.",
+    text: `${tableNum}번 테이블 주문 완료!`,
+    confirmButtonText: "확인",
+  }).then(()=>{
+    handleDelete(tableNum)
+  })
   // 삭제 기능
   const handleDelete = (delIdx) => {
     axios
@@ -105,7 +113,6 @@ const OrderTest = () => {
           })
         );
       }).catch(()=>{
-      window.location.href='/jwtexpired'
     });
   };
 

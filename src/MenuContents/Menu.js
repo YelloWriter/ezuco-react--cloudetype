@@ -32,7 +32,8 @@ const Menu = ({
   setVolume,
   menuText,
   setForHyenoh,
-    forHyenoh
+    forHyenoh,
+                reciptBody
 }) => {
   //카카오 해보자
   const [, , removeCookie] = useCookies("nickName");
@@ -159,7 +160,7 @@ const Menu = ({
                 { tableNum }번 테이블
               </p>
 
-              {/* {userID ==="admin" && 
+              {/* {userID ==="admin" &&
 
               <button onclick="location.href='http://localhost:3000/admin'">Admin 페이지로 이동</button>} */}
 
@@ -187,6 +188,7 @@ const Menu = ({
                   volume={volume}
                   bill={bill}
                   forHyenoh={forHyenoh}
+                  reciptBody={reciptBody}
               />
             </>
           </Col>

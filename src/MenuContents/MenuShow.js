@@ -6,7 +6,7 @@ import "./MenuShow.css";
 import List from "./List";
 import { useDispatch } from "react-redux";
 
-const MenuShow = ({ setForHyenoh ,forHyenoh}) => {
+const MenuShow = ({ setForHyenoh ,forHyenoh,reciptBody}) => {
   // console.log(content);
   const url = "https //13.124.151.184/test";
   const config = { "Content-Type": "application/json" };
@@ -87,6 +87,7 @@ const MenuShow = ({ setForHyenoh ,forHyenoh}) => {
                   bill={bill}
                   setBill={setBill}
                   forHyenoh={forHyenoh}
+                  reciptBody={reciptBody}
               />
             </Col>
 

@@ -32,7 +32,6 @@ const TotalSales = ({}) => {
         responseData.map((m) => (result = result + m.totalPrice)).toString();
         setTotalResult(result);
       }).catch(()=>{
-      window.location.href='/jwtexpired'
     });
   };
 

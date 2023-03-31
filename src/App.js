@@ -9,26 +9,52 @@ import JwtExpired from "./AdminContent/JwtExpired";
 import KakaoRegister from "./containers/Auth/KakaoRegister";
 const App = () => {
     const [forHyenoh, setForHyenoh] = useState("");
-
+    const [ reciptBody, setReciptBody ] = useState({})
 
 
     // menu에서 admin으로 바로 받기 (테이블번호 받기는 아직임)
-    // useEffect(() => {
-    //     // console.log("혜인아 이거 받아!", forHyenoh);
-    //
-    //     const oldOne = JSON.parse(localStorage.getItem("forHyenoh"))
-    //
-    //
-    //     console.log("원래 로컬에 저장되어 있던 거 :",oldOne)
-    //     console.log("이제 거기에 더해야만 하는 거 :",forHyenoh)
-    //
-    //     console.log(oldOne.totalPrice + forHyenoh.totalPrice)
-    //
-    //     if (forHyenoh) {
-    //         window.localStorage.setItem("forHyenoh", JSON.stringify(forHyenoh));
-    //     }
-    // }, [forHyenoh]);
+    useEffect(() => {
+        const oldOneFromStorage = JSON.parse(localStorage.getItem("forHyenoh"));
 
+        if(oldOneFromStorage === null){
+
+            if(forHyenoh)
+                window.localStorage.setItem("forHyenoh", JSON.stringify({bill: forHyenoh.bill, volume: forHyenoh.volume, totalPrice: forHyenoh.totalPrice }));
+            return;
+        }else{
+            if(!forHyenoh)
+                return
+        }
+        // const totalPrice = oldOneFromStorage.totalPrice + forHyenoh.totalPrice;
+
+        let tempVolume = {}
+        let tempBill = {}
+        let totalPrice = forHyenoh.totalPrice
+
+        if(oldOneFromStorage){
+            Object.keys(oldOneFromStorage.volume).forEach((menu, index) => {
+                tempVolume[menu] =  oldOneFromStorage.volume[menu] + forHyenoh.volume[menu]
+
+                if(oldOneFromStorage.bill[menu] > 0 && !forHyenoh.bill[menu]){
+                    tempBill[menu] = oldOneFromStorage.bill[menu]
+                }else if(forHyenoh.bill[menu] > 0 && !oldOneFromStorage.bill[menu]){
+                    tempBill[menu] = forHyenoh.bill[menu]
+                }else if(forHyenoh.bill[menu] > 0 && oldOneFromStorage.bill[menu] > 0){
+                    tempBill[menu] = oldOneFromStorage.bill[menu] + forHyenoh.bill[menu]
+                }
+            })
+            totalPrice = oldOneFromStorage.totalPrice + forHyenoh.totalPrice;
+        }
+
+        if (forHyenoh && !oldOneFromStorage) {
+            window.localStorage.setItem("forHyenoh", JSON.stringify({bill: forHyenoh.bill, volume: forHyenoh.volume, totalPrice}));
+
+            setReciptBody({bill: forHyenoh.bill, volume: forHyenoh.volume, totalPrice})
+        }else if(forHyenoh && oldOneFromStorage){
+            window.localStorage.setItem("forHyenoh", JSON.stringify({bill: tempBill, volume: tempVolume, totalPrice}));
+            setReciptBody({bill: tempBill, volume: tempVolume, totalPrice})
+        }
+    }, [forHyenoh]);
     return (
         <Switch>
             <Route path="/auth" component={Auth} />
@@ -37,7 +63,7 @@ const App = () => {
             <Route
                 exact
                 path="/menu"
-                component={() => <MenuShow setForHyenoh={setForHyenoh} forHyenoh={forHyenoh} />}
+                component={() => <MenuShow setForHyenoh={setForHyenoh} forHyenoh={forHyenoh} reciptBody={reciptBody} />}
             />
             <Route exact path="/" component={() => <Home />} />
             {/* {userID ==="admin" &&  */}

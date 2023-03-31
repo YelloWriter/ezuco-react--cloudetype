@@ -1,6 +1,5 @@
 
-import react, {Component, useEffect, useState} from 'react';
-import userData from "../../local-json/users.json";
+import react, { useEffect, useState} from 'react';
 import {InputWithLabel, RegisterLink } from "../../components/";
 import styled from "styled-components";
 import { shadow } from "../../lib/styleUtil";
@@ -8,14 +7,14 @@ import axios from "axios";
 import Swal from "sweetalert2";
 // import {color} from "three/examples/jsm/nodes/shadernode/ShaderNodeBaseElements";
 
-const Title2 = styled.div`
+const Title = styled.div`
   font-size: 1.5rem;
   font-weight: 500;
   color: gray;
   margin-bottom: 1rem;
 `;
 //아이디 비번 중복 체크 스타일
-const checkIdPw = {
+const checkIdPw2 = {
     border : "0",
     // marginLeft :"40%",
     // marginTop : "4%",
@@ -96,7 +95,7 @@ const KakaoRegister = () => {
     const delfunc =()=>{axios.delete(`http://localhost:8080/snsdel/${email}`,).catch(e=>{
         console.log(e)
     })
-}
+    }
     //아이지 중복체크 true면 중복/ 중복 아니면 false
     const dupleId = (e)=>{e.preventDefault()
         axios.post('https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/checkId',{"userId":email}).then(response=>{
@@ -137,17 +136,6 @@ const KakaoRegister = () => {
 
     }, [UserPw, confirmPw])
 
-    //버튼느낌 비밀번호확인
-
-    // const handleCheckPw = () => {
-
-    //   if (UserPw === confirmPw) {
-    //     setMatch(true);
-    //   } else {
-    //     setMatch(false);
-    //   }
-    // };
-
     const SignUp = async (event) => {
         event.preventDefault();
 
@@ -155,7 +143,6 @@ const KakaoRegister = () => {
             // alert("테이블 번호를 선택해 주세요!")
             return
         }
-
         registerFunc({
             email, UserPw, tableNum
         })
@@ -168,86 +155,78 @@ const KakaoRegister = () => {
 
 
     return (
+
         <>
-            <form
-                onSubmit={(e) => {
-                    SignUp(e);
-                }}
-            >
-                <Title2>회원 가입</Title2>
-                <h6 style={{ color: "black" }}>테이블 번호</h6>
-                <select
-                    name="TableNumber"
-                    style={{ width: "100%" }}
-                    onChange={(e) => {
-                        setTableNum(parseInt(e.target.value));
-                        console.log(tableNum);
-                    }}
-                >
-                    <option style={{ display: "none" }} value="0" disabled selected>
-                        테이블을 선택해주세요.
-                    </option>
-                    <option value="1">1번 테이블</option>
-                    <option value="2">2번 테이블</option>
-                    <option value="3">3번 테이블</option>
-                    <option value="4">4번 테이블</option>
-                </select>
-                {checkVal === null ? <span style={{color:"red"}}>아이디 중복 체크 해주세요</span> :
-                    checkVal ? <span style={{color:"red"}}>이미 존재하는 아이디</span> : <span style={{color:"black"}}>사용 가능한 아이디</span>}
-                <button style={checkIdPw} onClick={dupleId}>아이디 중복체크</button>
-                <InputWithLabel
-                    label="아이디"
-                    name="userId"
-                    placeholder="아이디"
-                    value={email}
-                    readonly
-                    onChange={(e) => setUserId(e.target.value)}
-                />
-                <div>
-                    <InputWithLabel
-                        label="비밀번호"
-                        name="userPw"
-                        placeholder="비밀번호"
-                        type="password"
-                        value={UserPw}
-                        onChange={handlePwChange}
-                    />
-                    <InputWithLabel
-                        label="비밀번호 확인"
-                        name="confirmPw"
-                        placeholder="비밀번호 확인"
-                        type="password"
-                        value={confirmPw}
-                        onChange={handleConfirmPwChange}
-                    />
-                    {/* <button style={checkIdPw} onClick={handleCheckPw}>
-      비밀번호 확인
-    </button> */}
-                    {/* {match === true && (
-      <p style={{ color: "blue" }}>비밀번호가 일치합니다.</p>
-    )}
-    {match === false && (
-      <p style={{ color: "red" }}>비밀번호가 일치하지 않습니다.</p>
-    )}
-              {match === null && <p></p>} */}
+            <div style={{marginTop:"6%",marginLeft:"35%",width:"500px"}}>
+                <div  href="/" style={{backgroundColor: "#1EBAED",
+                    height: "4rem",fontSize:"35px",color:"white",textAlign:"center"}}>ECUZO</div>
+                <div style={{backgroundColor:"white",padding:"20px"}}>
+                    <form
+                        onSubmit={(e) => {
+                            SignUp(e);
+                        }}
+                    >
+                        <Title>회원 가입</Title>
+                        <h6 style={{ color: "black" }}>테이블 번호</h6>
+                        <select
+                            name="TableNumber"
+                            style={{ width: "100%" }}
+                            onChange={(e) => {
+                                setTableNum(parseInt(e.target.value));
+                                console.log(tableNum);
+                            }}
+                        >
+                            <option style={{ display: "none" }} value="0" disabled selected>
+                                테이블을 선택해주세요.
+                            </option>
+                            <option value="1">1번 테이블</option>
+                            <option value="2">2번 테이블</option>
+                            <option value="3">3번 테이블</option>
+                            <option value="4">4번 테이블</option>
+                        </select>
+                        {checkVal === null ? <span style={{color:"red"}}>아이디 중복 체크 해주세요</span> :
+                            checkVal ? <span style={{color:"red"}}>이미 존재하는 아이디</span> : <span style={{color:"black"}}>사용 가능한 아이디</span>}
+                        <button style={checkIdPw2} onClick={dupleId}>아이디 중복체크</button>
 
+                        <InputWithLabel
+                            label="아이디"
+                            name="userId"
+                            placeholder="아이디"
+                            value={email}
+                            readonly
+                            onChange={(e) => setUserId(e.target.value)}
+                        />
+                        <div>
+                            <InputWithLabel
+                                label="비밀번호"
+                                name="userPw"
+                                placeholder="비밀번호"
+                                type="password"
+                                value={UserPw}
+                                onChange={handlePwChange}
 
-                    {match === null ? <span></span> :
-                        (match ? <span></span> : <span style={{color: "red"}}>비밀번호를 확인해 주세요</span>)}
+                            />
+                            <InputWithLabel
+                                label="비밀번호 확인"
+                                name="confirmPw"
+                                placeholder="비밀번호 확인"
+                                type="password"
+                                value={confirmPw}
+                                onChange={handleConfirmPwChange}
+                            />
+                            {match === null ? <span></span> :
+                                (match ? <span></span> : <span style={{color: "red"}}>비밀번호를 확인해 주세요</span>)}
+                        </div>
+                        <LoginBtn2 type="submit" disabled={!match} onclick={delfunc()}>
+                            회원가입
+                            {match === null ? <span></span> :
+                                match ? <span></span> : <span >  불가</span>}
+                        </LoginBtn2>
 
-                    {/* {match === null && UserPw !== "" && confirmPw !== "" && (
-            <p style={{ color: "gray" }}>비밀번호를 확인해주세요.</p>
-          )} */}
+                        <RegisterLink to="/auth/login">로그인</RegisterLink>
+                    </form>
                 </div>
-
-                <LoginBtn2 type="submit" disabled={!match} onclick={delfunc()}>
-                    회원가입
-                    {match === null ? <span></span> :
-                        match ? <span></span> : <span >  불가</span>}
-                </LoginBtn2>
-
-                <RegisterLink to="/auth/login">로그인</RegisterLink>
-            </form>
+            </div>
         </>
     );
 };

@@ -6,7 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import { Table } from "react-bootstrap";
 import MenuShow from "../MenuShow";
 
-const Receipt = ({ forHyenoh }) => {
+const Receipt = ({ forHyenoh,reciptBody }) => {
   const [show, setShow] = useState(false);
   const headerMeta = ["상품", "수량", "가격"];
 
@@ -14,11 +14,31 @@ const Receipt = ({ forHyenoh }) => {
   const handleShow = () => setShow(true);
   const [oldOne, setOldOne] = useState({});
 
+  // useEffect(() => {
+  //   const oldOneFromStorage = JSON.parse(localStorage.getItem("forHyenoh"));
+  //   setOldOne(oldOneFromStorage);
+
+  //   const totalPrice = oldOneFromStorage.totalPrice + forHyenoh.totalPrice;
+  //   if (forHyenoh) {
+  //     window.localStorage.setItem(
+  //         "forHyenoh",
+  //         JSON.stringify({ ...oldOneFromStorage, ...forHyenoh, totalPrice })
+  //     );
+  //   }
+  // }, [forHyenoh]);
   useEffect(() => {
     const oldOneFromStorage = JSON.parse(localStorage.getItem("forHyenoh"));
-    setOldOne(oldOneFromStorage);
+    setOldOne(oldOneFromStorage || {}); // null일 경우 빈 객체로 초기화
 
-    const totalPrice = oldOneFromStorage.totalPrice + forHyenoh.totalPrice;
+    let totalPrice = 0;
+    if (oldOneFromStorage && forHyenoh) {
+      totalPrice = oldOneFromStorage.totalPrice + forHyenoh.totalPrice;
+    } else if (oldOneFromStorage) {
+      totalPrice = oldOneFromStorage.totalPrice;
+    } else if (forHyenoh) {
+      totalPrice = forHyenoh.totalPrice;
+    }
+
     if (forHyenoh) {
       window.localStorage.setItem(
           "forHyenoh",
@@ -50,13 +70,24 @@ const Receipt = ({ forHyenoh }) => {
               </tr>
               </thead>
 
+              {/* <tbody className="ReciptBody">
+              {Object.keys(reciptBody.bill).map((rec, index) => {
+                 return (
+                  <tr key={rec}>
+                    <th>{rec}</th>
+                    <th>{reciptBody.volume[rec]}</th>
+                    <th>{reciptBody.bill[rec]}</th>
+                  </tr>
+                );
+              })}
+            </tbody> */}
               <tbody className="ReciptBody">
-              {Object.keys(forHyenoh).map((key,index) => {
+              {reciptBody.bill && Object.keys(reciptBody.bill).map((rec, index) => {
                 return (
-                    <tr key={key}>
-                      <th>{forHyenoh.volume[key]}</th>
-                      <th>{forHyenoh.volume[key]}</th>
-                      <th>{forHyenoh.volume[key]}</th>
+                    <tr key={rec}>
+                      <th>{rec}</th>
+                      <th>{reciptBody.volume[rec]}</th>
+                      <th>{reciptBody.bill[rec]}</th>
                     </tr>
                 );
               })}
@@ -70,7 +101,7 @@ const Receipt = ({ forHyenoh }) => {
                 <td style={{ backgroundColor: "white" }}></td>
                 <td style={{ backgroundColor: "white" }}></td>
                 <td style={{ backgroundColor: "white" }}>
-                  total : {oldOne.totalPrice + forHyenoh.totalPrice}원
+                  total : {(oldOne?.totalPrice || 0) + (forHyenoh?.totalPrice || 0)}원
                 </td>
               </tr>
               </tfoot>

@@ -93,16 +93,16 @@ const Login = (props) => {
         />
         <LoginBtn type="submit">로그인</LoginBtn>
       </form>
-      <a type="submit" href={KAKAO_AUTH_URL}>
-        <img style={{width:"80px",height:"50px",marginTop:"10px"}}
-            src={process.env.PUBLIC_URL + "/kakao2.png"}
-            alt="카카오 연동하기"
-        />
-        <p>연동하러가기</p>
-      </a>
-
-
+      <div>
+        <a type="submit" href={KAKAO_AUTH_URL}>
+          <img style={{width:"80px",height:"50px",marginLeft:"10px"}}
+               src={process.env.PUBLIC_URL + "/kakao2.png"}
+               alt="카카오 연동하기"
+          />
+          <p>연동하러가기</p>
+        </a>
       <RegisterLink to="/auth/register">회원가입</RegisterLink>
+      </div>
     </>
   );
 };
