@@ -119,7 +119,7 @@ const MenuCheckModal = ({
     };
     const token =window.localStorage.getItem("userAccessToken")
     const [tableNum, setTableNum] =useState("");
-    axios.get("http://localhost:8080/userOne",{headers:{'Content-Type': 'application/json','Authorization':"Bearer "+token}
+    axios.get("https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/userOne",{headers:{'Content-Type': 'application/json','Authorization':"Bearer "+token}
     }).then(response=>{
         setTableNum(response.data['tableNum']);
     })
@@ -132,7 +132,7 @@ const MenuCheckModal = ({
         if (sentCnt === 0) {
             axios
                 .post(
-                    'http://localhost:8080/create',
+                    'https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/create',
                     { content: menuText, totalPrice: totalPrice },
                     {
                         headers: {
@@ -158,7 +158,7 @@ const MenuCheckModal = ({
         } else {
             axios
                 .put(
-                    `http://localhost:8080/update/${tableNum}`,
+                    `https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/update/${tableNum}`,
                     { content: menuText, totalPrice: totalPrice },
                     {
                         headers: {

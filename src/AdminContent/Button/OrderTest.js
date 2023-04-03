@@ -34,7 +34,14 @@ const OrderTest = () => {
     content_t3,
     content_t4,
   ]);
-
+  // Swal.fire({
+  //   icon: "success",
+  //   title: "로봇이 서빙을 완료했습니다.",
+  //   text: `${tableNum}번 테이블 주문 완료!`,
+  //   confirmButtonText: "확인",
+  // }).then(()=>{
+  //   handleDelete(tableNum)
+  // })
   useEffect(() => {
     setOrderText([content_t1, content_t2, content_t3, content_t4]);
   }, [content_t1, content_t2, content_t3, content_t4]);
@@ -81,14 +88,6 @@ const OrderTest = () => {
     }, 25000);
     // return ()=>clearInterval(timer)
   }, [pathVal]);
-  Swal.fire({
-    icon: "success",
-    title: "로봇이 서빙을 완료했습니다.",
-    text: `${tableNum}번 테이블 주문 완료!`,
-    confirmButtonText: "확인",
-  }).then(()=>{
-    handleDelete(tableNum)
-  })
   // 삭제 기능
   const handleDelete = (delIdx) => {
     axios

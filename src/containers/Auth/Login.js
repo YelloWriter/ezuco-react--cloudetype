@@ -12,17 +12,21 @@ const LoginBtn = styled.button`
   padding-top: 0.6rem;
   padding-bottom: 0.5rem;
   background: #1ebaed;
+  border-color: #cacaca;
+  border-radius: 10px;
   color: white;
   text-align: center;
   font-size: 1.25rem;
   font-weight: 500;
   display: block;
-  width: 30%;
+  width: 100px;
+  height: 45px;
   cursor: pointer;
   user-select: none;
   transition: 0.2s all;
   &:hover {
     background: #1ebaed;
+    border: 0px;
     ${shadow(0)}
   }
   &:active {
@@ -36,7 +40,7 @@ const Title = styled.div`
   margin-bottom: 1rem;
 `;
 const Login = (props) => {
-  const KAKAO_AUTH_URL = "http://localhost:8080/oauth2/authorization/kakao";
+  const KAKAO_AUTH_URL = "https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/oauth2/authorization/kakao";
   //자체서버 로그인 토큰 저장
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
@@ -91,16 +95,18 @@ const Login = (props) => {
           placeholder="비밀번호"
           type="password"
         />
-        <LoginBtn type="submit">로그인</LoginBtn>
+        <br/>
+        <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <LoginBtn type="submit" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>로그인</LoginBtn>
+        <a type="submit" href={KAKAO_AUTH_URL} style={{ marginTop: "1rem", paddingTop: "0.6rem",paddingBottom:"0.5rem", paddingLeft:"10px"}}>
+        <img style={{width:"100px",height:"45px"}}
+             src={process.env.PUBLIC_URL + "/Kakaoplus.png"} alt="카카오 연동하기"/>
+      </a>
+        </div>
       </form>
       <div>
-        <a type="submit" href={KAKAO_AUTH_URL}>
-          <img style={{width:"80px",height:"50px",marginLeft:"10px"}}
-               src={process.env.PUBLIC_URL + "/kakao2.png"}
-               alt="카카오 연동하기"
-          />
-          <p>연동하러가기</p>
-        </a>
+      {/*<br/>*/}
+
       <RegisterLink to="/auth/register">회원가입</RegisterLink>
       </div>
     </>

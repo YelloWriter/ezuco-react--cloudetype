@@ -21,7 +21,9 @@ const checkIdPw2 = {
     paddingLeft:"130px",
     color : "#1ebaed",
     backgroundColor : "white",
-    fontSize: "0.9rem"
+    fontSize: "0.9rem",
+    position: "absolute",
+    right: 0,
 }
 
 const LoginBtn2 = styled.button`
@@ -53,8 +55,8 @@ const LoginBtn2 = styled.button`
   }
 `;
 
-const getData = async () => await axios.get('http://localhost:8080/snsuserInfo')
-const registerFunc = async (value) => await axios.post('http://localhost:8080/join',
+const getData = async () => await axios.get('https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/snsuserInfo')
+const registerFunc = async (value) => await axios.post('https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/join',
     {"userId":value.email, "userPw":value.UserPw,"tableNum":value.tableNum})
 const KakaoRegister = () => {
     const [UserId, setUserId] = useState("");
@@ -92,8 +94,7 @@ const KakaoRegister = () => {
     //카카오 로그인 유저 정보 받기
 
     //계정 연동 완료되면 지우기
-    const delfunc =()=>{axios.delete(`http://localhost:8080/snsdel/${email}`,).catch(e=>{
-        console.log(e)
+    const delfunc =()=>{axios.delete(`https://port-0-ezuco-cloudtype-108dypx2ale6e8i6k.sel3.cloudtype.app/snsdel/${email}`,).then(()=>{
     })
     }
     //아이지 중복체크 true면 중복/ 중복 아니면 false
@@ -147,7 +148,15 @@ const KakaoRegister = () => {
             email, UserPw, tableNum
         })
             .then(()=>{
-                window.location.href = '/auth/login';})
+                Swal.fire({
+                    icon: "success",
+                    title: "회원가입 완료!!",
+                    text: "로그인 해주세요",
+                    confirmButtonText: "확인",
+                }).then(()=>{
+                    window.location.href = '/auth/login';});
+            })
+
             .catch(error=>{
                 console.log(error.response.data);
             })
@@ -184,10 +193,11 @@ const KakaoRegister = () => {
                             <option value="3">3번 테이블</option>
                             <option value="4">4번 테이블</option>
                         </select>
+                        <div style={{position:"relative"}}>
                         {checkVal === null ? <span style={{color:"red"}}>아이디 중복 체크 해주세요</span> :
                             checkVal ? <span style={{color:"red"}}>이미 존재하는 아이디</span> : <span style={{color:"black"}}>사용 가능한 아이디</span>}
                         <button style={checkIdPw2} onClick={dupleId}>아이디 중복체크</button>
-
+                        </div>
                         <InputWithLabel
                             label="아이디"
                             name="userId"

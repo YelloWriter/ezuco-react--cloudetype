@@ -5,6 +5,7 @@ import {InputWithLabel, RegisterLink } from "../../components/";
 import styled from "styled-components";
 import { shadow } from "../../lib/styleUtil";
 import axios from "axios";
+import Swal from "sweetalert2";
 // import {color} from "three/examples/jsm/nodes/shadernode/ShaderNodeBaseElements";
 
 const Title = styled.div`
@@ -21,7 +22,9 @@ const checkIdPw = {
     paddingLeft:"130px",
     color : "#1ebaed",
     backgroundColor : "white",
-    fontSize: "0.9rem"
+    fontSize: "0.9rem",
+    position: "absolute",
+    right: 0
 }
 
 const LoginBtn = styled.button`
@@ -131,12 +134,18 @@ const Register = () => {
             UserId, UserPw, tableNum
         })
             .then(()=>{
-                window.location.href = '/auth/login';})
+                Swal.fire({
+                    icon: "success",
+                    title: "회원가입 완료!!",
+                    text: "로그인 해주세요",
+                    confirmButtonText: "확인",
+                }).then(()=>{
+                    window.location.href = '/auth/login';})
             .catch(error=>{
                 console.log(error.response.data);
             })
-    };
-
+    })
+    }
 
     return (
         <>
@@ -163,9 +172,11 @@ const Register = () => {
                     <option value="3">3번 테이블</option>
                     <option value="4">4번 테이블</option>
                 </select>
+                <div style={{position:"relative", }}>
                 {checkVal === null ? <span style={{color:"red"}}>아이디 중복 체크 해주세요</span> :
                     checkVal ? <span style={{color:"red"}}>이미 존재하는 아이디</span> : <span style={{color:"black"}}>사용 가능한 아이디</span>}
                 <button style={checkIdPw} onClick={dupleId}>아이디 중복체크</button>
+                </div>
                 <InputWithLabel
                     label="아이디"
                     name="userId"
