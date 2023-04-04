@@ -124,7 +124,6 @@ const MenuCheckModal = ({
         setTableNum(response.data['tableNum']);
     })
 
-
     const sendMenu = () => {
         console.log(`이전까지 주문 횟수는 ${sentCnt}번입니다`);
 

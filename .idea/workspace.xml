@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be443dcc-8dfe-4031-8f04-1ec360264d8a" name="변경" comment="change js">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminContent/Button/OrderTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminContent/Button/OrderTest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MenuContents/Button/MenuCheckModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuContents/Button/MenuCheckModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MenuContents/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuContents/Menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Auth/KakaoRegister.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Auth/KakaoRegister.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Auth/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Auth/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Auth/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Auth/Register.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,9 +21,6 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
-  </component>
-  <component name="PackageJsonUpdateNotifier">
-    <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="ProjectId" id="2NLg1uFS48iN9UsEmREX6GQdfCM" />
   <component name="ProjectViewState">
@@ -93,7 +86,10 @@
       <workItem from="1680243466888" duration="1760000" />
       <workItem from="1680252128883" duration="750000" />
       <workItem from="1680487963566" duration="10492000" />
-      <workItem from="1680504678172" duration="4077000" />
+      <workItem from="1680504678172" duration="4205000" />
+      <workItem from="1680574443228" duration="301000" />
+      <workItem from="1680574837496" duration="1101000" />
+      <workItem from="1680576435212" duration="1540000" />
     </task>
     <task id="LOCAL-00001" summary="change js">
       <created>1679475117291</created>
@@ -123,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680240721714</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="change js">
+      <created>1680512876927</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1680512876927</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
